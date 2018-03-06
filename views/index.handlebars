@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Apartment Listings in Phoenix</h3>
+    <div id="map"></div>
+      <form>
+        <div class="form-group">
+          <label> Bedrooms </label>
+          <input type="text" class="form-control" name="min_bed" placeholder="At least">
+          <input type="text" class="form-control" name="max_bed" placeholder="At most">
+        </div><div class="form-group">
+          <label> Bathrooms </label>
+          <input type="text" class="form-control" name="min_bath" placeholder="At least">
+          <input type="text" class="form-control" name="max_bath" placeholder="At most">
+        </div><div class="form-group">
+          <label> Price </label>
+          <input type="text" class="form-control" name="min_price" placeholder="At least">
+          <input type="text" class="form-control" name="max_price" placeholder="At most">
+        </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+    {{!-- fetch('http://localhost:2345/listings/?max_bed=2&min_bath=2')
+            .then((response) => response.json())
+            .then(data => {})}) 
+            listing => {
+                    var marker = new google.maps.Marker({
+                    position: listing.geometry.coordinates,
+                    map: map
+                   
+            }) --}}
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCroRdUBvef1285W3mySGEq3pFCo_DbNsk&callback=initMap">
+    </script>
+    <script>
+        var centerListing = {lat: 33.476759305937215, lng: -112.11512153436901};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: centerListing
+        });      
+        const dataFromServer = {{{features}}};
+
+        dataFromServer.forEach((listing) => {
+          var coords = listing.geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          })
+        })
+        console.log(dataFromServer);
+    </script>
+    
+  </body>
+</html>
