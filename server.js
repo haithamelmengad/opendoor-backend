@@ -8,7 +8,7 @@ import googlemaps from '@google/maps';
 import handlebars from 'express-handlebars';
 
 const googlemapsClient = googlemaps.createClient({
-    key: 'AIzaSyCroRdUBvef1285W3mySGEq3pFCo_DbNsk'
+    key: //google maps API key
 })
 
 const app = express();
@@ -79,13 +79,13 @@ app.get('/listings', (req, res) => {
             }
             geoJSONData.features = listingResult;
         }
-        console.log(JSON.stringify(geoJSONData.features));
-        console.log('min_bath', req.query.min_bath);
-        console.log('max_bath', req.query.max_bath)
-        console.log('min_bed', req.query.min_bed)
-        console.log('max_bed', req.query.max_bed)
-        console.log('min_price', req.query.min_price)
-        console.log('max_price', req.query.max_price)
+//         console.log(JSON.stringify(geoJSONData.features));
+//         console.log('min_bath', req.query.min_bath);
+//         console.log('max_bath', req.query.max_bath)
+//         console.log('min_bed', req.query.min_bed)
+//         console.log('max_bed', req.query.max_bed)
+//         console.log('min_price', req.query.min_price)
+//         console.log('max_price', req.query.max_price)
 
 
         res.render('index', {features: JSON.stringify(geoJSONData.features)});
